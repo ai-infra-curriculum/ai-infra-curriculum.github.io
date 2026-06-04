@@ -49,11 +49,10 @@ python3 -m http.server 8000
 
 - [ ] Wire the form `action` to a real provider
 - [ ] Set Cohort 1 start date (search for "Dates TBA")
-- [ ] Verify LinkedIn URL and add to Instructor card
 - [ ] Add Discord invite once the moderation bot has provisioned
 - [ ] Add OG image (`og:image` meta tag — currently missing)
 - [ ] Verify metadata via <https://www.opengraph.xyz/>
-- [ ] In repo settings → Pages → confirm deployed from `main` branch root
+- [x] In repo settings → Pages → deployed from `main` branch root
 
 ## Notes
 
