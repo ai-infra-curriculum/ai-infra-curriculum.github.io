@@ -159,6 +159,7 @@ code, kbd {
 }
 
 .hero h1 .period { color: var(--c-accent); }
+.hero h1 .accent { color: var(--c-accent); }
 
 .hero__sub {
   font-size: clamp(1.1rem, 1rem + 0.3vw, 1.3rem);
@@ -644,6 +645,64 @@ section {
   font-size: 13px;
   color: var(--c-ink-dim);
   margin-top: 4px;
+}
+
+/* ---------- ROLE LADDER ---------- */
+
+.ladder {
+  background: var(--c-bg-2);
+}
+
+.ladder__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 20px;
+}
+
+.rung {
+  padding: 28px;
+  background: var(--c-surface);
+  border-radius: var(--radius);
+  border: 1px solid var(--c-rule);
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+
+.rung__status {
+  font-family: var(--f-mono);
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--c-ink-dim);
+  margin-bottom: 14px;
+}
+
+.rung h3 {
+  margin-bottom: 10px;
+  font-size: 1.15rem;
+  color: var(--c-ink);
+}
+
+.rung p {
+  margin: 0;
+  font-size: 0.92rem;
+  color: var(--c-ink-dim);
+  line-height: 1.55;
+}
+
+.rung--live {
+  background: linear-gradient(180deg, var(--c-surface), rgba(126, 231, 135, 0.06));
+  border-color: var(--c-accent);
+}
+
+.rung--live .rung__status {
+  color: var(--c-accent);
+}
+
+.rung--specialty {
+  background: transparent;
+  border-style: dashed;
 }
 
 /* ---------- INSTRUCTOR ---------- */
