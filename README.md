@@ -1,6 +1,6 @@
 # ai-infra-curriculum.github.io
 
-The landing page for the **AI Infrastructure Bootcamp** — 16-week live cohort,
+The landing page for the **AI Infrastructure Academy** — 16-week live cohort,
 Founding Cohort priced at $199 / Standard $399.
 
 Serves at: <https://ai-infra-curriculum.github.io/>

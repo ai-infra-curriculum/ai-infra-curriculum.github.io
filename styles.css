@@ -1,4 +1,4 @@
-/* AI Infrastructure Bootcamp landing page
+/* AI Infrastructure Academy landing page
    Dark editorial — palette/typography mirrors the slide theme. */
 
 :root {
@@ -127,6 +127,20 @@ code, kbd {
 }
 
 .nav__links a:hover { color: var(--c-ink); }
+
+.nav__github {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.nav__github svg {
+  transition: transform 150ms ease-out;
+}
+
+.nav__github:hover svg {
+  transform: translateY(-1px);
+}
 
 @media (max-width: 720px) {
   .nav__links { display: none; }
