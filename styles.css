@@ -675,6 +675,16 @@ section {
   margin-bottom: 8px;
 }
 
+.instructor__card .photo {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  object-fit: cover;
+  display: block;
+  margin: 0 0 20px;
+  border: 2px solid var(--c-rule);
+}
+
 .instructor__card h3 {
   color: var(--c-ink);
   margin-bottom: 16px;
