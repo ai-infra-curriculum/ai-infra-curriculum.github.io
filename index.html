@@ -557,15 +557,16 @@
       </p>
 
       <!--
-        TODO: wire `action` to an email-capture provider.
-        Options:
-          - Formspree:    action="https://formspree.io/f/your-id" method="POST"
-          - ConvertKit:   action="https://app.convertkit.com/forms/.../subscriptions" method="POST"
-          - Buttondown:   action="https://buttondown.email/api/emails/embed-subscribe/..." method="POST"
-          - Tally.so:     replace this form with a Tally embed iframe
-        Until wired, the form below is a no-op visual placeholder.
+        Submissions are collected via Formspree (form id: xrewzpay).
+        They email contact@joshua-ferguson.com and appear in the Formspree
+        dashboard. The script at the bottom of this page submits via AJAX so
+        the applicant stays on the page and sees an inline confirmation.
+        To repoint: change the form id in the action below (the part after /f/).
       -->
-      <form class="form" method="POST" action="#" novalidate>
+      <form class="form" id="apply-form"
+            method="POST"
+            action="https://formspree.io/f/xrewzpay"
+            novalidate>
         <div class="form__group">
           <label for="name">Your name</label>
           <input type="text" id="name" name="name" required autocomplete="name">
@@ -586,10 +587,18 @@
           <textarea id="why" name="why" placeholder="What do you want to be able to do by week 16?" required></textarea>
         </div>
 
-        <button type="submit">
+        <!-- Subject line for the notification email Formspree sends you -->
+        <input type="hidden" name="_subject" value="New Cohort 1 application — ai-infra-curriculum">
+        <!-- Honeypot: bots fill this; humans never see it. Formspree drops _gotcha hits. -->
+        <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" aria-hidden="true" class="form__hp">
+
+        <button type="submit" id="apply-submit">
           Apply for Cohort 1
           <span class="arrow">→</span>
         </button>
+
+        <p class="form__status" id="apply-status" role="status" aria-live="polite" hidden></p>
+
         <p class="form__note">
           No marketing emails. One reply with cohort dates + payment link if accepted; one decline
           email if not. That's it.
@@ -600,6 +609,81 @@
 </section>
 
 </main>
+
+<script>
+  // Progressive enhancement: submit the application via fetch so the
+  // applicant stays on the page. If JS is disabled, the form falls back
+  // to a normal POST to Formspree (which renders its own thank-you page).
+  (function () {
+    var form = document.getElementById('apply-form');
+    if (!form) return;
+
+    var btn = document.getElementById('apply-submit');
+    var status = document.getElementById('apply-status');
+    var btnLabel = btn.firstChild; // the "Apply for Cohort 1" text node
+
+    function showStatus(message, kind) {
+      status.textContent = message;
+      status.hidden = false;
+      status.classList.remove('form__status--ok', 'form__status--err');
+      status.classList.add(kind === 'ok' ? 'form__status--ok' : 'form__status--err');
+    }
+
+    form.addEventListener('submit', function (event) {
+      // Guard against shipping with the placeholder still in place.
+      if (form.action.indexOf('FORMSPREE_FORM_ID') !== -1) {
+        event.preventDefault();
+        showStatus('Form not configured yet — set the Formspree form ID.', 'err');
+        return;
+      }
+
+      // The form carries `novalidate`, so the browser won't block invalid
+      // submits on its own — we must stop them and surface the messages.
+      if (!form.checkValidity()) {
+        event.preventDefault();
+        form.reportValidity();
+        return;
+      }
+
+      event.preventDefault();
+      btn.disabled = true;
+      btnLabel.nodeValue = 'Sending… ';
+
+      fetch(form.action, {
+        method: 'POST',
+        body: new FormData(form),
+        headers: { Accept: 'application/json' }
+      })
+        .then(function (response) {
+          if (response.ok) {
+            form.reset();
+            showStatus(
+              'Got it — your application is in. You’ll hear back within 3 business days.',
+              'ok'
+            );
+            btn.hidden = true;
+          } else {
+            return response.json().then(function (data) {
+              var msg = (data && data.errors && data.errors.length)
+                ? data.errors.map(function (e) { return e.message; }).join(', ')
+                : 'Something went wrong. Email contact@joshua-ferguson.com instead.';
+              showStatus(msg, 'err');
+              btn.disabled = false;
+              btnLabel.nodeValue = 'Apply for Cohort 1 ';
+            });
+          }
+        })
+        .catch(function () {
+          showStatus(
+            'Network error — please try again, or email contact@joshua-ferguson.com.',
+            'err'
+          );
+          btn.disabled = false;
+          btnLabel.nodeValue = 'Apply for Cohort 1 ';
+        });
+    });
+  })();
+</script>
 
 <footer>
   <div class="wrap">
