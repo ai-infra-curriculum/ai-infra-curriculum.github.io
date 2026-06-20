@@ -661,6 +661,80 @@ section {
   margin-top: 4px;
 }
 
+/* Minimum-requirements panel + acknowledgment checkbox */
+.form__reqs {
+  border: 1px solid var(--c-rule);
+  border-left: 3px solid var(--c-accent-2);
+  border-radius: 8px;
+  background: var(--c-surface);
+  padding: 18px 20px 20px;
+  margin: 0;
+}
+
+.form__reqs legend {
+  font-family: var(--f-mono);
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--c-ink-dim);
+  padding: 0 8px;
+}
+
+.form__reqs-list {
+  list-style: none;
+  margin: 4px 0 16px;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.form__reqs-list li {
+  position: relative;
+  padding-left: 22px;
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--c-ink-dim);
+}
+
+.form__reqs-list li::before {
+  content: "→";
+  position: absolute;
+  left: 0;
+  color: var(--c-accent-2);
+}
+
+.form__reqs-list strong {
+  color: var(--c-ink);
+  font-weight: 600;
+}
+
+.form__check {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  cursor: pointer;
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--c-ink);
+  padding-top: 14px;
+  border-top: 1px solid var(--c-rule);
+}
+
+.form__check input[type="checkbox"] {
+  flex: 0 0 auto;
+  width: 20px;
+  height: 20px;
+  margin-top: 1px;
+  accent-color: var(--c-accent);
+  cursor: pointer;
+}
+
+.form__check input[type="checkbox"]:focus-visible {
+  outline: 2px solid var(--c-accent-2);
+  outline-offset: 2px;
+}
+
 /* Honeypot — kept out of the visual + a11y tree, but reachable by bots */
 .form__hp {
   position: absolute;

@@ -587,6 +587,21 @@
           <textarea id="why" name="why" placeholder="What do you want to be able to do by week 16?" required></textarea>
         </div>
 
+        <fieldset class="form__reqs">
+          <legend>Minimum requirements</legend>
+          <ul class="form__reqs-list">
+            <li>Comfortable writing <strong>Python</strong> (no prior ML experience needed).</li>
+            <li>A laptop with <strong>8&nbsp;GB+ RAM</strong> and <strong>~30&nbsp;GB free disk</strong> — macOS, Linux, or Windows&nbsp;+&nbsp;WSL.</li>
+            <li>About <strong>3.5&nbsp;hours per week</strong> for 16 weeks (90-min live session + ~2&nbsp;hrs homework).</li>
+            <li>Willing to use <strong>AWS free tier</strong> in weeks&nbsp;13–14 (~$10–20 if you don't tear down promptly).</li>
+          </ul>
+          <label class="form__check" for="requirements_ack">
+            <input type="checkbox" id="requirements_ack" name="requirements_ack" value="Yes — meets minimum requirements" required>
+            <span>I meet these minimum requirements, and I understand that without them I'm
+            likely to fall behind the cohort.</span>
+          </label>
+        </fieldset>
+
         <!-- Subject line for the notification email Formspree sends you -->
         <input type="hidden" name="_subject" value="New Cohort 1 application — ai-infra-curriculum">
         <!-- Honeypot: bots fill this; humans never see it. Formspree drops _gotcha hits. -->
