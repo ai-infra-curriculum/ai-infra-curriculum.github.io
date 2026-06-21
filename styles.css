@@ -540,6 +540,11 @@ section {
   border-radius: var(--radius);
 }
 
+/* First-cohort callout: green accent to signal it's live */
+.cohort-callout .teams-callout__inner {
+  border-left-color: var(--c-accent);
+}
+
 .teams-callout__copy h2 {
   margin: 4px 0 8px;
 }
@@ -607,6 +612,79 @@ section {
   font-size: 14px;
   line-height: 1.6;
   max-width: 72ch;
+}
+
+/* ---------- LADDER GROUPS + ROLE PAGES ---------- */
+
+.ladder__groups {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  margin-top: 8px;
+}
+
+.ladder__group-title {
+  font-family: var(--f-mono);
+  font-size: 13px;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--c-ink-dim);
+  margin: 0 0 16px;
+}
+
+/* Rung cards are links on the hub page */
+a.rung {
+  text-decoration: none;
+  color: inherit;
+  border: 1px solid var(--c-rule);
+  transition: transform 150ms ease, border-color 150ms ease;
+}
+
+a.rung:hover {
+  border-color: var(--c-accent-2);
+  transform: translateY(-2px);
+}
+
+.rung--dev .rung__status {
+  color: var(--c-warn);
+}
+
+.badge-dev {
+  color: var(--c-warn);
+  font-weight: 600;
+}
+
+/* Role page: repo links + crosssell */
+.role-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  margin-top: 28px;
+}
+
+.role-links a {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 18px;
+  border: 1px solid var(--c-rule);
+  border-radius: 8px;
+  color: var(--c-ink);
+  font-family: var(--f-mono);
+  font-size: 14px;
+  transition: border-color 150ms ease;
+}
+
+.role-links a:hover {
+  border-color: var(--c-accent-2);
+}
+
+.role-crosssell {
+  margin-top: 28px;
+  color: var(--c-ink-dim);
+  font-size: 14px;
+  line-height: 1.6;
+  max-width: 70ch;
 }
 
 /* ---------- FAQ ---------- */
