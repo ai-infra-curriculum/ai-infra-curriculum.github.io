@@ -525,6 +525,90 @@ section {
   font-weight: 700;
 }
 
+/* ---------- FOR TEAMS / B2B ---------- */
+
+/* Slim callout on the consumer page that links to teams.html */
+.teams-callout__inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 32px;
+  padding: 32px;
+  background: var(--c-surface);
+  border: 1px solid var(--c-rule);
+  border-left: 4px solid var(--c-accent-2);
+  border-radius: var(--radius);
+}
+
+.teams-callout__copy h2 {
+  margin: 4px 0 8px;
+}
+
+.teams-callout__copy p {
+  color: var(--c-ink-dim);
+  max-width: 56ch;
+  margin: 0;
+}
+
+.teams-callout__inner .hero__cta {
+  flex: 0 0 auto;
+}
+
+@media (max-width: 720px) {
+  .teams-callout__inner {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 20px;
+  }
+}
+
+.teams__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 24px;
+  margin-top: 8px;
+}
+
+.tier.team-featured {
+  border-color: var(--c-accent-2);
+  border-left: 4px solid var(--c-accent-2);
+  position: relative;
+}
+
+.tier__flag {
+  position: absolute;
+  top: -11px;
+  left: 32px;
+  font-family: var(--f-mono);
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--c-bg);
+  background: var(--c-accent-2);
+  padding: 3px 10px;
+  border-radius: 6px;
+}
+
+.tier__price--quote {
+  font-size: 1.9rem;
+  font-family: var(--f-mono);
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  color: var(--c-accent-2);
+}
+
+.teams__note {
+  margin-top: 28px;
+  padding: 18px 22px;
+  border-left: 3px solid var(--c-accent);
+  background: var(--c-surface);
+  border-radius: 8px;
+  color: var(--c-ink-dim);
+  font-size: 14px;
+  line-height: 1.6;
+  max-width: 72ch;
+}
+
 /* ---------- FAQ ---------- */
 
 .faq {
@@ -610,7 +694,8 @@ section {
 }
 
 .form__group input,
-.form__group textarea {
+.form__group textarea,
+.form__group select {
   background: var(--c-surface);
   border: 1px solid var(--c-rule);
   border-radius: 8px;
@@ -621,8 +706,18 @@ section {
   transition: border-color 150ms ease;
 }
 
+.form__group select {
+  appearance: none;
+  cursor: pointer;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath fill='%238b949e' d='M6 8 0 0h12z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 16px center;
+  padding-right: 40px;
+}
+
 .form__group input:focus,
-.form__group textarea:focus {
+.form__group textarea:focus,
+.form__group select:focus {
   outline: none;
   border-color: var(--c-accent);
 }
