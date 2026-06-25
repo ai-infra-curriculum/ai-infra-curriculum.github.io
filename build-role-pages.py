@@ -31,24 +31,21 @@ ROLES: dict[str, dict] = {
     "senior-architect": {"name": "Senior AI Infrastructure Architect", "blurb": "Architect across the enterprise: multi-region, multi-tenant platforms, governance, and the long-horizon decisions that outlive any single project."},
     "principal-architect": {"name": "Principal AI Infrastructure Architect", "blurb": "Own the architectural vision org-wide: standards, paved roads, and the strategy that turns scattered ML work into a coherent platform."},
     "team-lead": {"name": "AI Infrastructure Team Lead", "blurb": "Lead an AI infrastructure team: delivery, mentorship, planning, and translating between engineers and the business without losing the technical thread."},
-    "chief-ai-officer": {"name": "Chief AI Officer", "blurb": "The executive view: AI strategy, governance, risk, build-vs-buy, and turning AI capability into business outcomes and defensible org structure."},
     "mlops": {"name": "MLOps Engineer", "blurb": "Own the ML lifecycle in production: pipelines, experiment tracking, model registries, CI/CD for models, monitoring, and progressive rollout."},
     "ml-platform": {"name": "ML Platform Engineer", "blurb": "Build the internal platform other ML teams build on: paved roads, self-service, feature and serving infra, GPU scheduling, and cost levers."},
     "performance": {"name": "AI Performance Engineer", "blurb": "Make ML systems fast and cheap: profiling, quantization and compression, batching, CUDA-level optimization, and serving economics."},
-    "security": {"name": "AI Infrastructure Security Engineer", "blurb": "Secure the AI stack: threat modeling, supply-chain and model security, secrets, access control, and the controls that keep ML systems and data safe."},
-    "agentic-ai-developer": {"name": "Agentic AI Developer", "blurb": "Entry rung of the agentic track: LLM APIs, prompt engineering, structured output, tool and function calling, retrieval basics, and shipping a first LLM-powered app."},
-    "agentic-ai-engineer": {"name": "Agentic AI Engineer", "blurb": "Build real agentic systems: multi-step agents, tool use, retrieval, evaluation, and the production patterns behind reliable LLM applications."},
-    "senior-agentic-ai-engineer": {"name": "Senior Agentic AI Engineer", "blurb": "Lead agentic engineering: complex multi-agent systems, orchestration, evaluation at scale, safety, and the architecture of production agent platforms."},
-    "agentic-systems-architect": {"name": "Agentic Systems Architect", "blurb": "Architect agentic platforms: multi-agent orchestration, memory and context systems, evaluation and safety infrastructure, and enterprise-grade agent systems."},
 }
 
-# Ordered groups for the ladder grid.
+# Ordered groups for the ladder grid. Only the 11 ai-infra tracks — the
+# agentic vertical and the security + chief-ai-officer roles moved to the
+# sibling orgs (ai-engineering-curriculum, ai-governance-curriculum) and
+# are surfaced via the "Curriculum family" cross-link in index.html, not
+# as rungs here.
 GROUPS: list[tuple[str, list[str]]] = [
     ("Engineering ladder", ["junior-engineer", "engineer", "senior-engineer", "principal-engineer"]),
     ("Architecture ladder", ["architect", "senior-architect", "principal-architect"]),
-    ("Platform & specialties", ["mlops", "ml-platform", "performance", "security"]),
-    ("Leadership", ["team-lead", "chief-ai-officer"]),
-    ("Agentic track", ["agentic-ai-developer", "agentic-ai-engineer", "senior-agentic-ai-engineer", "agentic-systems-architect"]),
+    ("Platform & specialties", ["mlops", "ml-platform", "performance"]),
+    ("Leadership", ["team-lead"]),
 ]
 
 GH_ICON = ('<svg viewBox="0 0 16 16" width="14" height="14" fill="currentColor" aria-hidden="true">'
