@@ -1,0 +1,310 @@
+/* AI Career Curriculum — landing page.
+   One idea carries the page: the AI stack as a cross-section, with each
+   curriculum as a layer relative to the model. Each org owns one hue, used
+   everywhere that org appears (stack layer, section rule, links, level tags). */
+
+:root {
+  --paper: #eef1f4;
+  --surface: #ffffff;
+  --ink: #14213d;
+  --ink-soft: #465267;
+  --rule: #ccd3dc;
+
+  --infra: #1f5f63;   --infra-tint: #d7e7e7;
+  --ml: #7e5410;      --ml-tint: #f1e3c8;
+  --aieng: #2a43b0;   --aieng-tint: #dce1f6;
+  --gov: #663a70;     --gov-tint: #e9ddec;
+  --startup: #3f6a2a; --startup-tint: #dde9d4;
+  --work: #96392c;    --work-tint: #f4e0da;
+
+  --font-display: "Bricolage Grotesque", "Avenir Next", "Segoe UI", sans-serif;
+  --font-body: "IBM Plex Sans", "Helvetica Neue", Arial, sans-serif;
+
+  --text-base: clamp(1rem, 0.96rem + 0.2vw, 1.0625rem);
+  --text-small: 0.9rem;
+  --text-h1: clamp(2.6rem, 1.5rem + 4.4vw, 4.75rem);
+  --text-h2: clamp(2rem, 1.45rem + 2.2vw, 3.1rem);
+  --text-lead: clamp(1.15rem, 1.05rem + 0.5vw, 1.4rem);
+
+  --gap: clamp(1.25rem, 0.9rem + 1.5vw, 2rem);
+  --space-section: clamp(4rem, 2.8rem + 5vw, 7.5rem);
+  --measure: 62ch;
+
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-size: var(--text-base);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3 { font-family: var(--font-display); margin: 0; }
+p { margin: 0; }
+a { color: inherit; }
+
+:focus-visible { outline: 3px solid var(--ink); outline-offset: 3px; border-radius: 2px; }
+
+.visually-hidden {
+  position: absolute; width: 1px; height: 1px; overflow: hidden;
+  clip: rect(0 0 0 0); white-space: nowrap;
+}
+
+.skip {
+  position: absolute; left: 1rem; top: -3rem; z-index: 10;
+  background: var(--ink); color: var(--surface); padding: 0.5rem 0.9rem; text-decoration: none;
+}
+.skip:focus { top: 1rem; }
+
+/* ---- page frame ---------------------------------------------------------- */
+
+.top, main, .foot {
+  width: min(100% - 2 * var(--gap), 76rem);
+  margin-inline: auto;
+}
+
+.top__nav {
+  display: flex; justify-content: space-between; align-items: baseline;
+  padding-block: 1.4rem;
+}
+.top__brand {
+  font-family: var(--font-display); font-weight: 650; font-size: 1.15rem;
+  text-decoration: none; letter-spacing: -0.01em;
+}
+.top__gh { color: var(--ink-soft); text-decoration-thickness: 1px; text-underline-offset: 3px; }
+.top__gh:hover { color: var(--ink); }
+
+/* ---- hero: headline beside the stack ------------------------------------ */
+
+.hero {
+  display: grid;
+  gap: clamp(2.5rem, 1rem + 5vw, 5rem);
+  padding-block: clamp(2.5rem, 1rem + 5vw, 5.5rem) var(--space-section);
+  align-items: center;
+}
+@media (min-width: 62rem) {
+  .hero { grid-template-columns: minmax(0, 1fr) minmax(0, 1.05fr); }
+}
+
+.hero h1 {
+  font-size: var(--text-h1); font-weight: 720; line-height: 1.02;
+  letter-spacing: -0.028em; max-width: 13ch;
+  font-variation-settings: "opsz" 96;
+}
+.hero__sub {
+  margin-top: 1.6rem; font-size: var(--text-lead); line-height: 1.45; max-width: 34ch;
+}
+.hero__facts { margin-top: 1.25rem; color: var(--ink-soft); max-width: 46ch; }
+.hero__hint { margin-top: 2rem; font-weight: 500; color: var(--ink-soft); }
+.hero__figure { margin: 0; }
+
+/* The stack: layers widen away from the model, like a lens around it. */
+.stack { list-style: none; margin: 0; padding: 0; display: grid; gap: 0.5rem; }
+.stack__layer, .stack__core { width: var(--w, 100%); margin-inline: auto; }
+
+.layer {
+  --hue: var(--ink); --tint: var(--surface);
+  display: flex; justify-content: space-between; align-items: baseline; gap: 1rem;
+  padding: 0.95rem 1.1rem;
+  background: var(--tint); border-left: 6px solid var(--hue);
+  text-decoration: none; color: var(--ink);
+  transition: background-color 160ms ease, color 160ms ease;
+}
+.layer__name {
+  font-family: var(--font-display); font-weight: 650; font-size: 1.15rem; letter-spacing: -0.01em;
+}
+.layer__verb { font-size: var(--text-small); color: var(--ink-soft); text-align: right; }
+.layer:hover, .layer:focus-visible { background: var(--hue); color: var(--surface); }
+.layer:hover .layer__verb, .layer:focus-visible .layer__verb { color: var(--surface); }
+
+.stack__core { --w: 44%; padding-block: 0.35rem; }
+.stack__core span {
+  display: block; text-align: center; padding: 0.7rem 1rem;
+  background: var(--ink); color: var(--surface);
+  font-family: var(--font-display); font-weight: 600; letter-spacing: 0.01em;
+  border-radius: 999px;
+}
+
+/* The one orchestrated moment: layers open out from the model on load. */
+@media (prefers-reduced-motion: no-preference) {
+  .stack__core { animation: core-in 420ms var(--ease-out) both; }
+  .stack__layer {
+    animation: layer-in 620ms var(--ease-out) both;
+    animation-delay: calc(180ms + var(--i) * 70ms);
+  }
+}
+@keyframes core-in { from { opacity: 0; transform: scale(0.92); } }
+@keyframes layer-in { from { opacity: 0; transform: scaleX(0.55); } }
+
+/* ---- one section per org -------------------------------------------------- */
+
+.org {
+  display: grid; gap: var(--gap);
+  padding-block: clamp(2.5rem, 1.5rem + 3vw, 4rem) var(--space-section);
+  border-top: 5px solid var(--hue);
+  scroll-margin-top: 1rem;
+}
+@media (min-width: 58rem) {
+  .org { grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.4fr); column-gap: clamp(2rem, 1rem + 4vw, 5rem); }
+  .org__intro { position: sticky; top: 1.5rem; align-self: start; }
+}
+
+/* One hue per org, applied by theme class (sections, cards, whole org pages)
+   or layer class (the stack). */
+.theme--ai-infra,       .layer--ai-infra       { --hue: var(--infra);   --tint: var(--infra-tint); }
+.theme--ml-engineering, .layer--ml-engineering { --hue: var(--ml);      --tint: var(--ml-tint); }
+.theme--ai-engineering, .layer--ai-engineering { --hue: var(--aieng);   --tint: var(--aieng-tint); }
+.theme--ai-governance,  .layer--ai-governance  { --hue: var(--gov);     --tint: var(--gov-tint); }
+.theme--ai-startup,     .layer--ai-startup     { --hue: var(--startup); --tint: var(--startup-tint); }
+.theme--ai-workforce,   .layer--ai-workforce   { --hue: var(--work);    --tint: var(--work-tint); }
+
+.org h2 {
+  font-size: var(--text-h2); font-weight: 700; line-height: 1.05; letter-spacing: -0.022em;
+  color: var(--hue);
+}
+.org__verb { margin-top: 0.4rem; font-size: var(--text-lead); font-weight: 500; }
+.org__overview { margin-top: 1.25rem; max-width: var(--measure); }
+.org__overview a { color: var(--hue); }
+.org__count { margin-top: 1rem; color: var(--ink-soft); }
+
+.org__actions { margin-top: 1.75rem; display: flex; flex-wrap: wrap; gap: 0.75rem 1.5rem; align-items: center; }
+.start {
+  display: inline-block; padding: 0.8rem 1.15rem;
+  background: var(--hue); color: var(--surface);
+  font-weight: 600; text-decoration: none; border-radius: 4px;
+  transition: transform 140ms ease, box-shadow 140ms ease;
+}
+.start:hover { box-shadow: 0 0 0 4px var(--tint); }
+.start:active { transform: translateY(1px); }
+.org__all { color: var(--hue); font-weight: 500; text-underline-offset: 3px; }
+
+.band {
+  font-size: 1.05rem; font-weight: 650; letter-spacing: -0.005em;
+  margin: 2rem 0 0.75rem; color: var(--ink-soft);
+}
+.band:first-child { margin-top: 0; }
+
+.roles { list-style: none; margin: 0; padding: 0; display: grid; gap: 0.6rem; }
+.role {
+  background: var(--surface); padding: 1rem 1.15rem 0.95rem;
+  border-left: 3px solid var(--tint);
+  transition: border-color 160ms ease;
+}
+.role:hover, .role:focus-within { border-left-color: var(--hue); }
+
+.role__head { display: flex; justify-content: space-between; align-items: baseline; gap: 1rem; }
+.role__title {
+  font-family: var(--font-display); font-weight: 650; font-size: 1.12rem;
+  text-decoration: none; letter-spacing: -0.01em;
+}
+.role__title:hover { color: var(--hue); text-decoration: underline; text-underline-offset: 3px; }
+.role__level {
+  flex: none; font-size: 0.8rem; font-weight: 600; color: var(--hue);
+  background: var(--tint); padding: 0.1rem 0.45rem; border-radius: 3px;
+}
+.role__focus { margin-top: 0.35rem; color: var(--ink-soft); max-width: var(--measure); }
+.role__meta {
+  margin-top: 0.6rem; display: flex; justify-content: space-between; gap: 1rem;
+  font-size: var(--text-small); color: var(--ink-soft);
+}
+.role__links { display: flex; gap: 1rem; }
+.role__links a { color: var(--hue); font-weight: 500; text-underline-offset: 3px; }
+
+/* ---- how it works + footer ------------------------------------------------- */
+
+.how { padding-block: clamp(2.5rem, 1.5rem + 3vw, 4rem) var(--space-section); border-top: 5px solid var(--ink); }
+.how h2 { font-size: var(--text-h2); font-weight: 700; letter-spacing: -0.022em; line-height: 1.05; }
+.how__grid { margin-top: 2rem; display: grid; gap: var(--gap); }
+@media (min-width: 50rem) { .how__grid { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+.how h3 { font-size: 1.25rem; font-weight: 650; margin-bottom: 0.5rem; }
+.how p { color: var(--ink-soft); }
+
+.foot { padding-block: 2rem 3rem; border-top: 1px solid var(--rule); color: var(--ink-soft); }
+.foot a { color: var(--ink); text-underline-offset: 3px; }
+.foot__orgs { list-style: none; padding: 0; margin: 1rem 0 0; display: flex; flex-wrap: wrap; gap: 0.5rem 1.5rem; }
+
+@media (max-width: 30rem) {
+  .layer { flex-direction: column; gap: 0.15rem; }
+  .layer__verb { text-align: left; }
+  .stack__layer { --w: 100% !important; }
+  .stack__core { --w: 70%; }
+}
+
+/* ---- org pages ------------------------------------------------------------ */
+
+.top__links { display: flex; gap: 1.25rem; }
+
+.eyebrow {
+  font-size: var(--text-small); font-weight: 600; letter-spacing: 0.04em;
+  text-transform: uppercase; color: var(--ink-soft); margin-bottom: 1rem;
+}
+.eyebrow a { color: var(--hue); text-underline-offset: 3px; }
+.page-org .hero h1 { color: var(--hue); max-width: 16ch; }
+.page-org .hero__sub { max-width: 40ch; }
+.page-org .hero__sub strong { color: var(--hue); }
+.hero__caption { margin-top: 0.9rem; font-size: var(--text-small); color: var(--ink-soft); text-align: center; }
+
+/* "You are here": the current org's layer is solid, the others stay tinted. */
+.layer--here { background: var(--hue); color: var(--surface); box-shadow: 0 6px 18px -10px var(--hue); }
+.layer--here .layer__verb { color: var(--surface); }
+
+.panel {
+  display: grid; gap: var(--gap);
+  padding-block: clamp(2.5rem, 1.5rem + 3vw, 4rem) var(--space-section);
+  border-top: 5px solid var(--hue);
+}
+.panel h2 { font-size: var(--text-h2); font-weight: 700; line-height: 1.05; letter-spacing: -0.022em; }
+.panel__note { margin-top: 0.75rem; color: var(--ink-soft); max-width: var(--measure); }
+
+.stance { align-items: start; }
+@media (min-width: 58rem) {
+  .stance { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); column-gap: clamp(2rem, 1rem + 4vw, 5rem); }
+  .stance .panel__head { grid-column: 1 / -1; }
+}
+.stance__lead { font-size: var(--text-lead); line-height: 1.5; max-width: 38ch; }
+.stance__overview { margin-top: 1.25rem; color: var(--ink-soft); max-width: var(--measure); }
+.stance__overview a { color: var(--hue); }
+.stance__owns { background: var(--surface); padding: 1.5rem 1.6rem; border-left: 6px solid var(--hue); }
+.stance__owns h3 { font-size: 1.25rem; font-weight: 650; }
+.owns { margin: 0.9rem 0 0; padding: 0; list-style: none; display: grid; gap: 0.55rem; }
+.owns li { padding-left: 1.4rem; position: relative; }
+.owns li::before {
+  content: ""; position: absolute; left: 0; top: 0.62em;
+  width: 0.55rem; height: 0.55rem; background: var(--hue); border-radius: 1px;
+}
+.not-owns { margin-top: 1.25rem; padding-top: 1rem; border-top: 1px solid var(--rule); color: var(--ink-soft); }
+.not-owns strong { color: var(--ink); }
+
+.handoffs {
+  list-style: none; margin: 0; padding: 0;
+  display: grid; gap: 0.9rem; grid-template-columns: repeat(auto-fit, minmax(min(100%, 19rem), 1fr));
+}
+.handoff {
+  background: var(--surface); padding: 1.2rem 1.25rem 1rem; border-top: 4px solid var(--hue);
+  transition: transform 160ms var(--ease-out), box-shadow 160ms ease;
+}
+.handoff:hover, .handoff:focus-within { box-shadow: 0 10px 24px -18px var(--ink); }
+@media (prefers-reduced-motion: no-preference) {
+  .handoff:hover, .handoff:focus-within { transform: translateY(-2px); }
+}
+.handoff h3 { font-size: 1.2rem; font-weight: 650; letter-spacing: -0.01em; }
+.handoff h3 a { color: var(--hue); text-decoration: none; }
+.handoff h3 a:hover { text-decoration: underline; text-underline-offset: 3px; }
+.handoff__verb { font-size: var(--text-small); color: var(--ink-soft); margin-top: 0.15rem; }
+.handoff dl { margin: 0.9rem 0 0; }
+.handoff dt { font-size: 0.8rem; font-weight: 600; letter-spacing: 0.03em; text-transform: uppercase; color: var(--hue); }
+.handoff dd { margin: 0.2rem 0 0.8rem; }
+
+.tech { margin: 0; display: grid; gap: 0.75rem 2rem; }
+@media (min-width: 50rem) { .tech { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+.tech div { background: var(--surface); padding: 0.9rem 1.1rem; border-left: 3px solid var(--tint); }
+.tech dt { font-weight: 600; }
+.tech dd { margin: 0.2rem 0 0; color: var(--ink-soft); }
